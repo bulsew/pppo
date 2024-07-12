@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Road, Intersection, RoadIntersectionRelation, TrafficPrediction,RoadTraffic,IntersectionRelationship,TrafficLightPrediction
-from .serializers import RoadSerializer, IntersectionSerializer, RoadIntersectionRelationSerializer, TrafficPredictionSerializer,RoadTrafficSerializer,IntersectionRelationshipSerializer,TrafficLightPredictionSerializer
+from .models import Road, Intersection, RoadIntersectionRelation, TrafficPrediction,RoadTraffic,IntersectionRelationship,TrafficLightPrediction,Feedback
+from .serializers import RoadSerializer, IntersectionSerializer, RoadIntersectionRelationSerializer,FeedbackSerializer, TrafficPredictionSerializer,RoadTrafficSerializer,IntersectionRelationshipSerializer,TrafficLightPredictionSerializer
 
 class RoadViewSet(viewsets.ModelViewSet):
     queryset = Road.objects.all()
@@ -18,7 +18,9 @@ class TrafficPredictionViewSet(viewsets.ModelViewSet):
     queryset = TrafficPrediction.objects.all()
     serializer_class = TrafficPredictionSerializer
 
-
+class FeedbackViewSet(viewsets.ModelViewSet):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
 class RoadTrafficViewSet(viewsets.ModelViewSet):
     queryset = RoadTraffic.objects.all()
     serializer_class = RoadTrafficSerializer

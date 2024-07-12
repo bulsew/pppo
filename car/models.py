@@ -141,3 +141,20 @@ class TrafficLightPrediction(models.Model):
     class Meta:
         verbose_name = '历史结果预测'
         verbose_name_plural = verbose_name
+
+#反馈表
+class Feedback(models.Model):
+    user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='feedbacks', verbose_name='用户id') #反向关系
+    road_id = models.ForeignKey(Road, on_delete=models.CASCADE, related_name='feedbacks', verbose_name='道路id')
+    road= models.CharField(max_length=100, verbose_name='道路名')
+    time = models.DateTimeField(default=timezone.now,verbose_name='时间')  # 使用当前时间作为默认值
+    feedback = models.TextField(verbose_name='反馈内容')  # 存储用户的反馈内容
+
+    class Meta:
+        verbose_name = '反馈信息'
+        verbose_name_plural = verbose_name
+
+    # 你可以在这里添加其他方法，如__str__用于在Django admin中显示模型的字符串表示
+    def __str__(self):
+        return f"Feedback from {self.user} on {self.road} at {self.time}"
+
