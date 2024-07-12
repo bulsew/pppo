@@ -21,6 +21,8 @@ class RoadIntersectionRelationSerializer(serializers.ModelSerializer):
 
 class TrafficPredictionSerializer(serializers.ModelSerializer):
     road_name = serializers.ReadOnlyField(source='road.name')
+    intersection_name = serializers.ReadOnlyField(source='intersection.name')
+
 
     class Meta:
         model = TrafficPrediction
@@ -45,7 +47,7 @@ class IntersectionRelationshipSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class TrafficLightPredictionSerializer(serializers.ModelSerializer):
-    # road_name = serializers.ReadOnlyField(source='road.name')
+    road_name = serializers.ReadOnlyField(source='road.name')
     class Meta:
         model = TrafficLightPrediction
         fields = '__all__'

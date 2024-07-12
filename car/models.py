@@ -7,10 +7,14 @@ class Road(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='道路id')
     name = models.CharField(max_length=100, verbose_name='道路名')
     information = models.TextField(verbose_name='道路信息')
-    dataset_link = models.URLField(default='',verbose_name='数据集链接')#
+    upload_url = models.URLField(default='',verbose_name='上传链接')
     lng = models.FloatField(default=0.0,verbose_name='经度')  # 经度
     lat = models.FloatField(default=0.0,verbose_name='纬度')  # 纬度
     main_road = models.IntegerField(default=0,verbose_name='所属大道')#
+    current_red_time = models.IntegerField(default=0,verbose_name='当前红灯时间')
+    current_green_time_1 = models.IntegerField(default=0,verbose_name='当前绿灯时间1')
+    current_green_time_2 = models.IntegerField(default=0,verbose_name='当前绿灯时间2')
+    video_url = models.URLField(default='',verbose_name='监控链接')#展示
 
     class Meta:
         verbose_name = '道路信息'
@@ -51,10 +55,22 @@ class RoadIntersectionRelation(models.Model):
 
 
 
+from datetime import time, datetime, timezone
+from django.utils import timezone
+
+
+def now_time():
+    return time(datetime.now(timezone.utc).astimezone().hour,
+                datetime.now(timezone.utc).astimezone().minute,
+                datetime.now(timezone.utc).astimezone().second)
+
+
 #5.车流量预测图表
 class TrafficPrediction(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name='查询记录id')
     road = models.ForeignKey(Road, on_delete=models.CASCADE,verbose_name='道路id')
+    intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE,verbose_name='交叉口id',blank=True,null=True)
+
     # 数据1-8
     data1 = models.FloatField(default=0.0)
     data2 = models.FloatField(default=0.0)
@@ -64,6 +80,9 @@ class TrafficPrediction(models.Model):
     data6 = models.FloatField(default=0.0)
     data7 = models.FloatField(default=0.0)
     data8 = models.FloatField(default=0.0)
+    date = models.DateField(default=timezone.now, verbose_name='日期',blank=True,null=True)
+    time = models.CharField(max_length=100, verbose_name='时间',blank=True,null=True)
+
 
     class Meta:
         verbose_name = '车流量预测图表'
@@ -111,7 +130,6 @@ def now_time():
     return time(datetime.now(timezone.utc).astimezone().hour,
                 datetime.now(timezone.utc).astimezone().minute,
                 datetime.now(timezone.utc).astimezone().second)
-
 class TrafficLightPrediction(models.Model):
     road = models.ForeignKey(Road, on_delete=models.CASCADE,verbose_name='道路id')
     date = models.DateField(default=timezone.now, verbose_name='日期')

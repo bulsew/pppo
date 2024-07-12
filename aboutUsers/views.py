@@ -179,7 +179,7 @@ class CurrentUserAPIView(APIView):
                 'email': user.email,
                 'gender': user.gender,
                 'name': user.name,
-                'is_superuser': user.is_superuser
+                'is_superuser':user.is_superuser
                 # 可以添加其他需要返回的用户信息字段
             }
             return Response(data, status=status.HTTP_200_OK)
