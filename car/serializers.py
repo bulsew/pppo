@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Road, Intersection, RoadIntersectionRelation, TrafficPrediction,RoadTraffic,IntersectionRelationship,TrafficLightPrediction,Feedback
+from .models import Road, Intersection, RoadIntersectionRelation, TrafficPrediction,RoadTraffic,IntersectionRelationshipQWE,TrafficLightPrediction,Feedback
 
 class RoadSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,9 +49,12 @@ class IntersectionRelationshipSerializer(serializers.ModelSerializer):
     id0 = IntersectionSerializer(read_only=True)
     id1 = IntersectionSerializer(read_only=True)
     id2 = IntersectionSerializer(read_only=True)
+    road1 = RoadSerializer(read_only=True)
+    road2 = RoadSerializer(read_only=True)
+    road3 = RoadSerializer(read_only=True)
 
     class Meta:
-        model = IntersectionRelationship
+        model = IntersectionRelationshipQWE
         fields = '__all__'
 
 class TrafficLightPredictionSerializer(serializers.ModelSerializer):

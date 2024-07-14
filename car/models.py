@@ -109,10 +109,13 @@ class RoadTraffic(models.Model):
 
 
 
-class IntersectionRelationship(models.Model):
+class IntersectionRelationshipQWE(models.Model):
     id0 = models.ForeignKey(Intersection, on_delete=models.CASCADE, related_name='id0_relations')
     id1 = models.ForeignKey(Intersection, on_delete=models.CASCADE, related_name='id1_relations')
     id2 = models.ForeignKey(Intersection, on_delete=models.CASCADE, related_name='id2_relations')
+    road1 =models.ForeignKey (Road, on_delete=models.CASCADE ,blank=True,max_length=255,null=True,related_name='road1')
+    road2 = models.ForeignKey(Road, on_delete=models.CASCADE ,blank=True, max_length=255, null=True,related_name='road2')
+    road3 = models.ForeignKey(Road, on_delete=models.CASCADE ,blank=True, max_length=255, null=True,related_name='road3')
 
     class Meta:
         verbose_name = '交叉口关系'

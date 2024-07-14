@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .models import Road, Intersection, RoadIntersectionRelation, TrafficPrediction,RoadTraffic,IntersectionRelationship,TrafficLightPrediction,Feedback
+from .models import Road, Intersection, RoadIntersectionRelation, TrafficPrediction,RoadTraffic,IntersectionRelationshipQWE,TrafficLightPrediction,Feedback
 from .serializers import RoadSerializer, IntersectionSerializer, RoadIntersectionRelationSerializer,FeedbackSerializer, TrafficPredictionSerializer,RoadTrafficSerializer,IntersectionRelationshipSerializer,TrafficLightPredictionSerializer
 from .fliter import *
 from django_filters.rest_framework import DjangoFilterBackend
@@ -32,7 +32,7 @@ class RoadTrafficViewSet(viewsets.ModelViewSet):
 
 
 class IntersectionRelationshipViewSet(viewsets.ModelViewSet):
-    queryset = IntersectionRelationship.objects.all()
+    queryset = IntersectionRelationshipQWE.objects.all()
     serializer_class = IntersectionRelationshipSerializer
 
 

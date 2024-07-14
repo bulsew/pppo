@@ -17,7 +17,7 @@ def reg_email(email):
         'code': str(code)
     }
     print(str(code))
-    # 这里的html文件就是发送验证码部分的html模板我放在下面
+    # html文件是发送验证码部分
     email_template_name = 'regCode.html'
     t = loader.get_template(email_template_name)
 
